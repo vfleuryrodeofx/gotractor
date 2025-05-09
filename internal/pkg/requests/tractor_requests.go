@@ -29,7 +29,7 @@ func ExtractJID(url string) string {
 }
 
 // Get tree data
-func GetTaskTree(jid string) map[string]any {
+func GetTaskTree(jid string) (map[string]any, []interface{}) {
 	url := fmt.Sprintf("http://tractor.rodeofx.com/Tractor/monitor?q=jtree&jid=%s", jid)
 	slog.Info("Querying task tree at", "url", url)
 
@@ -60,7 +60,11 @@ func GetTaskTree(jid string) map[string]any {
 	userData := root[user].(map[string]any)
 	jidkey := userData[fmt.Sprintf("J%s", jid)].(map[string]any)
 	data := jidkey["data"].(map[string]any)
-	return data
+	fmt.Println("here")
+	tasksData := jidkey["children"].([]interface{})
+	fmt.Println(tasksData)
+
+	return data, tasksData
 }
 
 func GetTaskLog(owner, jobID, taskID string) string {
