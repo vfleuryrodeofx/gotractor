@@ -10,7 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/victorfleury/gotractor/internal/pkg/requests"
-	"github.com/victorfleury/gotractor/internal/pkg/ui"
+	//"github.com/victorfleury/gotractor/internal/pkg/ui"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -28,11 +28,12 @@ them in a nice TUI.`,
 			os.Exit(1)
 		}
 		url := args[0]
-		fmt.Println("Url passed is ", url)
+		slog.Info("Url passed is ", "url", url)
 		jid := requests.ExtractJID(url)
 
 		data := requests.GetTaskTree(jid)
-		ui.Show(data)
+		//ui.Show(data)
+		requests.GetTaskLog(data["user"].(string), jid, "9")
 	},
 }
 

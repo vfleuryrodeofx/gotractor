@@ -16,7 +16,7 @@ type AppState int
 
 // Enum for managing app state
 const (
-	baseView = iota
+	tasksView = iota
 	logView
 )
 
@@ -40,7 +40,7 @@ func DefaultStyle(width int) *Styles {
 // Root Model
 type RootModel struct {
 	state  AppState
-	base   tea.Model
+	tasks  tea.Model
 	log    tea.Model
 	width  int
 	height int
@@ -95,15 +95,6 @@ func Show(data map[string]interface{}) {
 	main := &RootModel{data: data}
 	style := DefaultStyle(main.width)
 	main.style = style
-	//style := DefaultStyle(main.width)
-	//searchField := searchFieldInit()
-	//sp := spinner.New()
-	//sp.Spinner = spinner.Dot
-	//sp.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
-	//main.style = style
-	//main.spinner = sp
-	//main.searchInput = searchField
-	//main.focused = true
 
 	f, err := tea.LogToFile("debug.log", "debug")
 	if err != nil {
