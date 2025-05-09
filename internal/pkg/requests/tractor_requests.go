@@ -60,9 +60,7 @@ func GetTaskTree(jid string) (map[string]any, []interface{}) {
 	userData := root[user].(map[string]any)
 	jidkey := userData[fmt.Sprintf("J%s", jid)].(map[string]any)
 	data := jidkey["data"].(map[string]any)
-	fmt.Println("here")
 	tasksData := jidkey["children"].([]interface{})
-	fmt.Println(tasksData)
 
 	return data, tasksData
 }
@@ -106,7 +104,7 @@ func GetTaskLog(owner, jobID, taskID string) string {
 		panic(err)
 	}
 
-	fmt.Println(string(logContent))
+	//fmt.Println(string(logContent))
 
 	return string(logContent)
 }

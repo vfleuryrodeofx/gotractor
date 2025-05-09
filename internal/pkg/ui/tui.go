@@ -1,14 +1,20 @@
+// // TODO :
+// -
 package ui
 
 import (
 	"fmt"
-	"github.com/charmbracelet/bubbles/list"
 	"io"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/charmbracelet/bubbles/list"
+	"github.com/victorfleury/gotractor/internal/pkg/requests"
+	"github.com/victorfleury/gotractor/internal/pkg/utils"
+
 	//"github.com/charmbracelet/bubbles/spinner"
-	"github.com/charmbracelet/bubbles/textarea"
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -53,7 +59,12 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 		return
 	}
 
-	str := fmt.Sprintf("%d. %s", index+1, i)
+	var str string
+	if index < 10 {
+		str = fmt.Sprintf("%d.  %s", index+1, i)
+	} else {
+		str = fmt.Sprintf("%d. %s", index+1, i)
+	}
 
 	fn := itemStyle.Render
 	if index == m.Index() {
@@ -85,45 +96,47 @@ func DefaultStyle(width int) *Styles {
 
 // Root Model
 type RootModel struct {
-	state  AppState
-	tasks  list.Model
-	log    textarea.Model
-	width  int
-	height int
-	style  *Styles
-	data   map[string]any
+	state       AppState
+	tasks       list.Model
+	logViewport viewport.Model
+	logContent  string
+	width       int
+	height      int
+	style       *Styles
+	data        map[string]any
 	//tasksData []map[string]any
-	tasksData []interface{}
+	tasksData []any
+	jid       string
 }
 
-func initModel(data map[string]any, tasksData []interface{}) *RootModel {
+func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
 
-	fmt.Println(data)
+	//fmt.Println(data)
 
 	// Initialize the list
 	items := []list.Item{}
-	for _, task := range tasksData {
-		_rootTask := task.(map[string]any)
-		taskData := _rootTask["data"].(map[string]any)
-		fmt.Println(taskData["tid"], " | ", taskData["title"])
-		i := item(fmt.Sprintf("#%v | %s", taskData["tid"], taskData["title"]))
-		//i := item("Foobar")
+	tasksTitles := utils.GetListFromTreeTask(tasksData)
+	for _, task := range tasksTitles {
+		var title string = ""
+		if len(task.Data.Title) > 40 {
+			title = task.Data.Title[0:40]
+		} else {
+			title = task.Data.Title
+		}
+		i := item(fmt.Sprintf("%s | %s | %s ", task.Hash, task.Data.State, title))
 		items = append(items, i)
 	}
 
 	l := list.New(items, itemDelegate{}, 20, 14)
 	l.Title = "Jobs tasks :"
 
-	// Initialize the textarea
-	ta := textarea.New()
-	ta.Placeholder = "Logs..."
-	ta.Blur()
+	// Initialize the viewport
 
 	return &RootModel{
 		tasks:     l,
-		log:       ta,
 		tasksData: tasksData,
 		data:      data,
+		jid:       jid,
 	}
 }
 
@@ -141,19 +154,29 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		r.height = msg.Height
 		// Calculate sizes for split view (20/80)
 		listWidth := r.width * 20 / 100
-		textareaWidth := r.width*80/100 - 4 // subtract padding
+		viewportWidth := r.width*80/100 - 4 // subtract padding
 
 		// Update list width
 		r.tasks.SetWidth(listWidth)
 		r.tasks.SetHeight(r.height - 10) // subtract space for header and section
 
-		// Update textarea width
-		r.log.SetWidth(textareaWidth)
-		r.log.SetHeight(r.height - 10) // subtract space for header and section
+		// Update viewport width
+		r.logViewport = viewport.New(viewportWidth, r.height-10)
+		r.logViewport.SetContent(r.logContent)
+		//r.logViewport.Width = viewportWidth
+		//r.logViewport.Height = r.height - 10
+		//r.logViewport.SetHeight(r.height - 10) // subtract space for header and section
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "esc", "q":
 			return r, tea.Quit
+		case "enter":
+			i := r.tasks.Cursor()
+			fmt.Println("Selected i ", i)
+			foobar := r.tasksData[i]
+			fmt.Println(foobar)
+			taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, "9")
+			r.logViewport.SetContent(taskLog)
 		}
 	}
 	// Handle list updates
@@ -161,9 +184,9 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	r.tasks = newTasks
 	cmds = append(cmds, cmd)
 
-	// Handle textarea updates
-	newTextarea, cmd := r.log.Update(msg)
-	r.log = newTextarea
+	// Handle viewport updates
+	newviewport, cmd := r.logViewport.Update(msg)
+	r.logViewport = newviewport
 	cmds = append(cmds, cmd)
 
 	return r, tea.Batch(cmds...)
@@ -187,11 +210,11 @@ func (r RootModel) View() string {
 			r.style.Underlined.Render("\nComment   :"),
 			comment,
 		)
-	// Split view (list and textarea)
+	// Split view (list and viewport)
 	splitView := lipgloss.JoinHorizontal(
 		lipgloss.Left,
-		r.style.BorderStyle.Render(r.tasks.View()), // 20%
-		containerStyle.Render(r.log.View()),        // 80%
+		r.style.BorderStyle.Render(r.tasks.View()),  // 20%
+		containerStyle.Render(r.logViewport.View()), // 80%
 	)
 
 	// Join all sections vertically
@@ -205,10 +228,10 @@ func (r RootModel) View() string {
 }
 
 // func Show(data, tasksData map[string]any) {
-func Show(data map[string]any, tasksData []interface{}) {
+func Show(data map[string]any, tasksData []any, jid string) {
 
 	//main := &RootModel{data: data}
-	main := initModel(data, tasksData)
+	main := initModel(data, tasksData, jid)
 	style := DefaultStyle(main.width)
 	main.style = style
 

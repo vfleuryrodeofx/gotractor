@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/victorfleury/gotractor/internal/pkg/requests"
 	"github.com/victorfleury/gotractor/internal/pkg/ui"
+	"github.com/victorfleury/gotractor/internal/pkg/utils"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -32,7 +33,9 @@ them in a nice TUI.`,
 		jid := requests.ExtractJID(url)
 
 		data, tasksData := requests.GetTaskTree(jid)
-		ui.Show(data, tasksData)
+		fmt.Println(data["user"])
+		utils.GetListFromTreeTask(tasksData)
+		ui.Show(data, tasksData, jid)
 		//requests.GetTaskLog(data["user"].(string), jid, "9")
 	},
 }
