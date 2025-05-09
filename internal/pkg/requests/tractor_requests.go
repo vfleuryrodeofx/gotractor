@@ -60,17 +60,15 @@ func GetTaskTree(jid string) (map[string]any, []interface{}) {
 	userData := root[user].(map[string]any)
 	jidkey := userData[fmt.Sprintf("J%s", jid)].(map[string]any)
 	data := jidkey["data"].(map[string]any)
-	tasksData := jidkey["children"].([]interface{})
+	tasksData := jidkey["children"].([]any)
 
 	return data, tasksData
 }
 
 func GetTaskLog(owner, jobID, taskID string) string {
-	url := fmt.Sprintf("%s%s", ROOT_ENDPOINT, fmt.Sprintf(ENDPOINTS["logs"], owner, jobID, taskID))
+	url := fmt.Sprintf("http://tractor-log-viewer.rodeofx.com/tractor/%s/J%s/%s.log", owner, jobID, taskID)
 	slog.Info("Fetching logs from endpoint ", "endpoint", url)
 
-	// Perform requestLogPath in 2 steps.
-	// First we get the actual log file path to query
 	requestLogPath, err := http.Get(url)
 	if err != nil {
 		panic(err)
@@ -78,33 +76,10 @@ func GetTaskLog(owner, jobID, taskID string) string {
 
 	defer requestLogPath.Body.Close()
 
-	body, err := io.ReadAll(requestLogPath.Body)
+	logContent, err := io.ReadAll(requestLogPath.Body)
 	if err != nil {
 		panic(err)
 	}
-
-	var logPath map[string][]string
-	err = json.Unmarshal(body, &logPath)
-	if err != nil {
-		panic(err)
-	}
-
-	slog.Info("Log path is", "logpath", logPath["LoggingRedirect"])
-
-	// Now fetch the actual logs.
-	logURL := logPath["LoggingRedirect"][0]
-	logs, err := http.Get(logURL)
-	if err != nil {
-		panic(err)
-	}
-	defer logs.Body.Close()
-
-	logContent, err := io.ReadAll(logs.Body)
-	if err != nil {
-		panic(err)
-	}
-
-	//fmt.Println(string(logContent))
 
 	return string(logContent)
 }

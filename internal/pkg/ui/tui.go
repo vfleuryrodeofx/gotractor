@@ -4,10 +4,10 @@ package ui
 
 import (
 	"fmt"
-	"io"
+	//"io"
 	"log"
 	"os"
-	"strings"
+	//"strings"
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/victorfleury/gotractor/internal/pkg/requests"
@@ -24,7 +24,7 @@ type AppState int
 
 // Enum for managing app state
 const (
-	tasksView = iota
+	tasksView AppState = iota
 	logView
 )
 
@@ -46,36 +46,20 @@ var (
 )
 
 // LIST Widget
-type item string
-type itemDelegate struct{}
-
-func (d itemDelegate) Height() int { return 1 }
-
-func (d itemDelegate) Spacing() int                            { return 0 }
-func (d itemDelegate) Update(_ tea.Msg, _ *list.Model) tea.Cmd { return nil }
-func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list.Item) {
-	i, ok := listItem.(item)
-	if !ok {
-		return
-	}
-
-	var str string
-	if index < 10 {
-		str = fmt.Sprintf("%d.  %s", index+1, i)
-	} else {
-		str = fmt.Sprintf("%d. %s", index+1, i)
-	}
-
-	fn := itemStyle.Render
-	if index == m.Index() {
-		fn = func(s ...string) string {
-			return selectedItemStyle.Render("> " + strings.Join(s, " "))
-		}
-	}
-
-	fmt.Fprint(w, fn(str))
+type taskItem struct {
+	tid         string
+	jid         string
+	title       string
+	status      string
+	description string
 }
-func (i item) FilterValue() string { return "" }
+
+func (ti taskItem) Tid() string         { return ti.tid }
+func (ti taskItem) Jid() string         { return ti.jid }
+func (ti taskItem) Title() string       { return ti.title }
+func (ti taskItem) Status() string      { return ti.status }
+func (ti taskItem) FilterValue() string { return "" }
+func (ti taskItem) Description() string { return ti.status }
 
 // Styles
 type Styles struct {
@@ -123,11 +107,12 @@ func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
 		} else {
 			title = task.Data.Title
 		}
-		i := item(fmt.Sprintf("%s | %s | %s ", task.Hash, task.Data.State, title))
+		i := taskItem{tid: task.Hash, status: task.Data.State, title: title, jid: jid}
 		items = append(items, i)
 	}
 
-	l := list.New(items, itemDelegate{}, 20, 14)
+	//l := list.New(items, itemDelegate{}, 20, 14)
+	l := list.New(items, list.NewDefaultDelegate(), 0, 0)
 	l.Title = "Jobs tasks :"
 
 	// Initialize the viewport
@@ -146,7 +131,7 @@ func (r RootModel) Init() tea.Cmd {
 
 func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
-	var cmd tea.Cmd
+	//var cmd tea.Cmd
 	var cmds []tea.Cmd
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
@@ -157,38 +142,41 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		viewportWidth := r.width*80/100 - 4 // subtract padding
 
 		// Update list width
-		r.tasks.SetWidth(listWidth)
-		r.tasks.SetHeight(r.height - 10) // subtract space for header and section
+		r.tasks.SetSize(listWidth, r.height-10)
 
 		// Update viewport width
 		r.logViewport = viewport.New(viewportWidth, r.height-10)
-		r.logViewport.SetContent(r.logContent)
-		//r.logViewport.Width = viewportWidth
-		//r.logViewport.Height = r.height - 10
-		//r.logViewport.SetHeight(r.height - 10) // subtract space for header and section
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "esc", "q":
 			return r, tea.Quit
 		case "enter":
-			i := r.tasks.Cursor()
-			fmt.Println("Selected i ", i)
-			foobar := r.tasksData[i]
-			fmt.Println(foobar)
-			taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, "9")
+			task_item := r.tasks.SelectedItem()
+			selectedTid := task_item.(taskItem).Tid()
+			taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
 			r.logViewport.SetContent(taskLog)
+		case "tab", "shift+tab":
+			if r.state == tasksView {
+				r.state = logView
+			} else {
+				r.state = tasksView
+			}
 		}
 	}
-	// Handle list updates
-	newTasks, cmd := r.tasks.Update(msg)
-	r.tasks = newTasks
-	cmds = append(cmds, cmd)
 
-	// Handle viewport updates
-	newviewport, cmd := r.logViewport.Update(msg)
-	r.logViewport = newviewport
-	cmds = append(cmds, cmd)
+	if r.state == tasksView {
+		// Handle list updates
+		newTasks, cmd := r.tasks.Update(msg)
+		r.tasks = newTasks
+		cmds = append(cmds, cmd)
+	}
 
+	if r.state == logView {
+		// Handle viewport updates
+		newviewport, cmd := r.logViewport.Update(msg)
+		r.logViewport = newviewport
+		cmds = append(cmds, cmd)
+	}
 	return r, tea.Batch(cmds...)
 }
 
@@ -205,9 +193,9 @@ func (r RootModel) View() string {
 	jobData := r.style.BorderStyle.Width(r.width-2).
 		Align(lipgloss.Left, lipgloss.Center).
 		Render(
-			r.style.Underlined.Render("Job title:"),
+			r.style.Underlined.Render("Job title :"),
 			title,
-			r.style.Underlined.Render("\nComment   :"),
+			r.style.Underlined.Render("\nComment :"),
 			comment,
 		)
 	// Split view (list and viewport)
@@ -224,7 +212,6 @@ func (r RootModel) View() string {
 		jobData,
 		splitView,
 	)
-	//return lipgloss.Place(r.width, r.height, lipgloss.Center, lipgloss.Top, lipgloss.JoinVertical(lipgloss.Top, header, jobData))
 }
 
 // func Show(data, tasksData map[string]any) {
