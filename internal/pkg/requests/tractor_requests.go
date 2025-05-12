@@ -16,16 +16,16 @@ var ENDPOINTS = map[string]string{
 	"logs":     "monitor?q=tasklogs&owner=%s&jid=%s&tid=%s",
 }
 
-func ExtractJID(url string) string {
+func ExtractJID(arg string) string {
 	pattern := regexp.MustCompile(`http://[A-z\-\.]*/tv/#jid=(?P<jid>[0-9]*)`)
 	slog.Info("Extracting jid from url")
-	matches := pattern.FindStringSubmatch(url)
+	matches := pattern.FindStringSubmatch(arg)
 	if len(matches) > 1 {
 		jid := matches[1]
 		slog.Info("JID found ", "jid", jid)
 		return jid
 	}
-	return ""
+	return arg
 }
 
 // Get tree data
