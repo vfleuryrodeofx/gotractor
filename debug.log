@@ -1,3 +1,119 @@
 Hellodebug 2025/05/07 21:38:30 program was killed: program experienced a panic
 HelloHelloHelloHellodebug 2025/05/07 22:39:24 program was killed: program experienced a panic
-HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHellodebug 2025/05/08 20:59:21 program was killed: program experienced a panic
+Hellodebug 2025/05/08 21:02:16 program was killed: program experienced a panic
+Hellodebug 2025/05/08 21:04:06 program was killed: program experienced a panic
+HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHellodebug 2025/05/08 22:28:32 program was killed: program experienced a panic
+Hellodebug 2025/05/09 08:29:25 program was killed: program experienced a panic
+Hellodebug 2025/05/09 08:40:24 program was killed: program experienced a panic
+HelloHelloHellodebug 2025/05/09 08:42:39 program was killed: program experienced a panic
+HelloHelloHellodebug 2025/05/09 08:44:23 program was killed: program experienced a panic
+HelloHellodebug 2025/05/09 08:47:19 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 08:47:19 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 08:48:25 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 08:48:25 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 08:48:33 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 08:48:33 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 08:55:55 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 08:55:55 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 09:04:46 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:04:46 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:04:59 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:04:59 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 09:12:39 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:39 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:12:45 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:45 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:12:47 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:47 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:12:48 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:48 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:12:48 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:48 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+debug 2025/05/09 09:12:49 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:12:49 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 09:13:51 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:13:51 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 09:17:40 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=jfmorissette&jid=2359298&tid=9"
+debug 2025/05/09 09:17:40 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T9.log]
+Hellodebug 2025/05/09 14:18:28 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:18:28 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+HelloHelloHellodebug 2025/05/09 14:31:55 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:31:55 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 14:31:58 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:31:58 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 14:31:59 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:31:59 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 14:32:00 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:32:00 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 14:32:02 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:32:02 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 14:37:22 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:37:22 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 14:39:25 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:39:25 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 14:39:41 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 14:39:41 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:04:03 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:04:03 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:04:17 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:04:17 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:04:56 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:04:56 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 15:04:59 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:04:59 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:05:53 program was killed: program experienced a panic
+Hellodebug 2025/05/09 15:13:27 program was killed: program experienced a panic
+Hellodebug 2025/05/09 15:15:21 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:15:21 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:16:45 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:16:45 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+debug 2025/05/09 15:21:41 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:21:41 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:27:07 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:27:07 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+HelloHelloHellodebug 2025/05/09 15:32:04 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:32:04 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:32:46 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:32:46 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:33:45 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=9"
+debug 2025/05/09 15:33:45 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T9.log]
+Hellodebug 2025/05/09 15:41:38 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T1"
+debug 2025/05/09 15:41:38 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT1.log]
+debug 2025/05/09 15:41:41 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T24"
+debug 2025/05/09 15:41:41 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT24.log]
+debug 2025/05/09 15:41:42 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T25"
+debug 2025/05/09 15:41:42 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT25.log]
+Hellodebug 2025/05/09 15:42:41 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T24"
+debug 2025/05/09 15:42:41 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT24.log]
+Hellodebug 2025/05/09 15:43:57 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T1"
+debug 2025/05/09 15:43:57 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT1.log]
+Hellodebug 2025/05/09 15:45:41 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T1"
+debug 2025/05/09 15:45:41 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT1.log]
+Hellodebug 2025/05/09 15:46:21 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T1"
+debug 2025/05/09 15:46:21 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT1.log]
+Hellodebug 2025/05/09 15:58:21 INFO Fetching logs from endpoint  endpoint="http://tractor.rodeofx.com/Tractor/monitor?q=tasklogs&owner=bramoul&jid=2377710&tid=T1"
+debug 2025/05/09 15:58:21 INFO Log path is logpath=[http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/TT1.log]
+Hellodebug 2025/05/09 16:03:37 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T1
+Hellodebug 2025/05/09 16:04:01 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T25.log
+Hellodebug 2025/05/09 16:05:13 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T1.log
+debug 2025/05/09 16:05:36 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T34.log
+HelloHellodebug 2025/05/09 16:13:59 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T24.log
+debug 2025/05/09 16:14:03 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T1.log
+Hellodebug 2025/05/09 16:16:59 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+debug 2025/05/09 16:17:15 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+Hellodebug 2025/05/09 16:26:27 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T25.log
+debug 2025/05/09 16:26:29 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T26.log
+Hellodebug 2025/05/09 16:27:09 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+HelloHellodebug 2025/05/09 16:31:01 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+Hellodebug 2025/05/09 16:32:34 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T30.log
+debug 2025/05/09 16:32:43 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T31.log
+Hellodebug 2025/05/09 16:33:37 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T1.log
+Hellodebug 2025/05/09 16:34:44 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T24.log
+debug 2025/05/09 16:34:46 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T27.log
+HelloHellodebug 2025/05/09 16:35:21 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T25.log
+debug 2025/05/09 16:35:23 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T27.log
+Hellodebug 2025/05/09 16:36:05 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T29.log
+debug 2025/05/09 16:36:12 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T32.log
+debug 2025/05/09 16:36:14 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+Hellodebug 2025/05/09 16:58:09 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log

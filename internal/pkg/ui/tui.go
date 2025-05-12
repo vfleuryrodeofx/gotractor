@@ -201,8 +201,8 @@ func (r RootModel) View() string {
 	// Split view (list and viewport)
 	splitView := lipgloss.JoinHorizontal(
 		lipgloss.Left,
-		r.style.BorderStyle.Render(r.tasks.View()),  // 20%
-		containerStyle.Render(r.logViewport.View()), // 80%
+		r.style.BorderStyle.Render(r.tasks.View()),                              // 20%
+		r.style.BorderStyle.Render(containerStyle.Render(r.logViewport.View())), // 80%
 	)
 
 	// Join all sections vertically
