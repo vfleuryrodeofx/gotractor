@@ -33,10 +33,8 @@ them in a nice TUI.`,
 		jid := requests.ExtractJID(url)
 
 		data, tasksData := requests.GetTaskTree(jid)
-		fmt.Println(data["user"])
 		utils.GetListFromTreeTask(tasksData)
 		ui.Show(data, tasksData, jid)
-		//requests.GetTaskLog(data["user"].(string), jid, "9")
 	},
 }
 

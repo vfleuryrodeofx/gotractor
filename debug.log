@@ -117,3 +117,27 @@ Hellodebug 2025/05/09 16:36:05 INFO Fetching logs from endpoint  endpoint=http:/
 debug 2025/05/09 16:36:12 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T32.log
 debug 2025/05/09 16:36:14 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
 Hellodebug 2025/05/09 16:58:09 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/bramoul/J2377710/T33.log
+HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHellodebug 2025/05/11 21:10:18 program was killed: program experienced a panic
+Hellodebug 2025/05/11 21:10:29 program was killed: program experienced a panic
+HelloHelloHelloHellodebug 2025/05/11 21:15:54 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:16:00 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+Hellodebug 2025/05/11 21:19:54 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T10.log
+debug 2025/05/11 21:19:55 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T11.log
+debug 2025/05/11 21:19:57 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+debug 2025/05/11 21:20:08 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+HelloHelloHelloHellodebug 2025/05/11 21:23:24 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:23:27 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:23:33 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:23:35 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+Hellodebug 2025/05/11 21:27:04 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T15.log
+debug 2025/05/11 21:27:07 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T15.log
+Hellodebug 2025/05/11 21:32:20 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:32:27 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T10.log
+debug 2025/05/11 21:32:29 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+HelloHelloHelloHelloHelloHelloHelloHellodebug 2025/05/11 21:38:56 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+debug 2025/05/11 21:39:04 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+HelloHellodebug 2025/05/11 21:40:00 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
+HelloHelloHellodebug 2025/05/11 21:41:09 program was killed: program experienced a panic
+HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHellodebug 2025/05/11 21:48:49 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T13.log
+debug 2025/05/11 21:48:51 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T14.log
+debug 2025/05/11 21:48:54 INFO Fetching logs from endpoint  endpoint=http://tractor-log-viewer.rodeofx.com/tractor/jfmorissette/J2359298/T12.log
