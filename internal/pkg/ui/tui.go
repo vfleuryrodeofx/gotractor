@@ -34,7 +34,7 @@ var (
 	headerStyle = lipgloss.NewStyle().
 			Bold(true).
 			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 0).
+			Padding(1, 0).
 			Width(100).
 			Align(lipgloss.Center) //.
 		//Border(lipgloss.RoundedBorder())
@@ -59,22 +59,29 @@ func (ti taskItem) Jid() string         { return ti.jid }
 func (ti taskItem) Title() string       { return ti.title }
 func (ti taskItem) Status() string      { return ti.status }
 func (ti taskItem) FilterValue() string { return "" }
-func (ti taskItem) Description() string { return ti.status }
+func (ti taskItem) Description() string {
+	return fmt.Sprintf("%s | Status : %s", ti.tid, ti.status)
+}
 
 // Styles
 type Styles struct {
-	BorderColor lipgloss.Color
-	BorderStyle lipgloss.Style
-	BoldText    lipgloss.Style
-	Underlined  lipgloss.Style
+	BorderColor         lipgloss.Color
+	BorderStyle         lipgloss.Style
+	BoldText            lipgloss.Style
+	Underlined          lipgloss.Style
+	SelectedView        lipgloss.Style
+	SelectedBorderColor lipgloss.Color
 }
 
 func DefaultStyle(width int) *Styles {
 	s := new(Styles)
-	s.BorderColor = lipgloss.Color("#e28743")
+	s.SelectedBorderColor = lipgloss.Color("#e28743")
+	s.BorderColor = lipgloss.Color("white")
 	s.BorderStyle = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(s.BorderColor).Padding(0, 1)
 	s.BoldText = lipgloss.NewStyle().Bold(true)
-	s.Underlined = lipgloss.NewStyle().Underline(true)
+	s.Underlined = lipgloss.NewStyle().Underline(true).Bold(true)
+	s.SelectedView = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(s.SelectedBorderColor).Padding(0, 1)
+
 	return s
 }
 
@@ -117,7 +124,6 @@ func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
 		items = append(items, i)
 	}
 
-	//l := list.New(items, itemDelegate{}, 20, 14)
 	l := list.New(items, list.NewDefaultDelegate(), 0, 0)
 	l.Title = "Jobs tasks :"
 
@@ -146,7 +152,7 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// Calculate sizes for split view (20/80)
 		listWidth := r.width * 20 / 100
 		//viewportWidth := r.width*80/100 - 4 // subtract padding
-		viewportWidth := r.width*80/100 - 8 // subtract padding
+		viewportWidth := r.width*80/100 - 1 // subtract padding
 		// Update list width
 		r.tasks.SetSize(listWidth, r.height-20)
 		// Update viewport width
@@ -191,6 +197,7 @@ func (r RootModel) View() string {
 	if !ok {
 		title = "No job title ..."
 	}
+
 	header := r.style.
 		BorderStyle.Width(r.width-2).
 		Align(lipgloss.Center, lipgloss.Center).
@@ -213,12 +220,21 @@ func (r RootModel) View() string {
 			r.style.Underlined.Render("\nEnv keys:"),
 			r.data["envkey"].([]any)[0].(string),
 		)
+	var splitView string
 	// Split view (list and viewport)
-	splitView := lipgloss.JoinHorizontal(
-		lipgloss.Top,
-		r.style.BorderStyle.Render(r.tasks.View()),                              // 20%
-		r.style.BorderStyle.Render(containerStyle.Render(r.logViewport.View())), // 80%
-	)
+	if r.state == tasksView {
+		splitView = lipgloss.JoinHorizontal(
+			lipgloss.Top,
+			r.style.SelectedView.Render(r.tasks.View()),                             // 20%
+			r.style.BorderStyle.Render(containerStyle.Render(r.logViewport.View())), // 80%
+		)
+	} else {
+		splitView = lipgloss.JoinHorizontal(
+			lipgloss.Top,
+			r.style.BorderStyle.Render(r.tasks.View()),                               // 20%
+			r.style.SelectedView.Render(containerStyle.Render(r.logViewport.View())), // 80%
+		)
+	}
 
 	// Join all sections vertically
 	return lipgloss.JoinVertical(
@@ -243,7 +259,6 @@ func Show(data map[string]any, tasksData []any, jid string) {
 		os.Exit(1)
 	}
 	defer f.Close()
-	f.WriteString("Hello")
 	p := tea.NewProgram(*main, tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
 		log.Fatal(err)
