@@ -4,16 +4,13 @@ package ui
 
 import (
 	"fmt"
-	//"io"
 	"log"
 	"os"
-	//"strings"
 
 	"github.com/charmbracelet/bubbles/list"
-	"github.com/victorfleury/gotractor/internal/pkg/requests"
-	"github.com/victorfleury/gotractor/internal/pkg/utils"
+	"github.com/vfleuryrodeofx/gotractor/internal/pkg/requests"
+	"github.com/vfleuryrodeofx/gotractor/internal/pkg/utils"
 
-	//"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"

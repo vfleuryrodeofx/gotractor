@@ -1,4 +1,4 @@
-module github.com/victorfleury/gotractor
+module github.com/vfleuryrodeofx/gotractor
 
 go 1.23.2
 

@@ -9,9 +9,9 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/victorfleury/gotractor/internal/pkg/requests"
-	"github.com/victorfleury/gotractor/internal/pkg/ui"
-	"github.com/victorfleury/gotractor/internal/pkg/utils"
+	"github.com/vfleuryrodeofx/gotractor/internal/pkg/requests"
+	"github.com/vfleuryrodeofx/gotractor/internal/pkg/ui"
+	"github.com/vfleuryrodeofx/gotractor/internal/pkg/utils"
 )
 
 // rootCmd represents the base command when called without any subcommands
