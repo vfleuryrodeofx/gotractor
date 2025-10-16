@@ -67,6 +67,7 @@ type Styles struct {
 	BoldText            lipgloss.Style
 	Underlined          lipgloss.Style
 	SelectedView        lipgloss.Style
+	ZoomedStyle         lipgloss.Style
 	SelectedBorderColor lipgloss.Color
 }
 
@@ -78,6 +79,7 @@ func DefaultStyle(width int) *Styles {
 	s.BoldText = lipgloss.NewStyle().Bold(true)
 	s.Underlined = lipgloss.NewStyle().Underline(true).Bold(true)
 	s.SelectedView = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(s.SelectedBorderColor).Padding(0, 1)
+	s.ZoomedStyle = lipgloss.NewStyle().Border(lipgloss.RoundedBorder(), true, false, true, false).BorderForeground(s.SelectedBorderColor).Padding(0, 1)
 
 	return s
 }
@@ -99,8 +101,9 @@ type RootModel struct {
 	style       *Styles
 	data        map[string]any
 	//tasksData []map[string]any
-	tasksData []any
-	jid       string
+	tasksData       []any
+	jid             string
+	showOnlyLogView bool
 }
 
 func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
@@ -169,6 +172,14 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			} else {
 				r.state = tasksView
 			}
+		case "z":
+			if r.showOnlyLogView == false {
+				r.showOnlyLogView = true
+				fmt.Println("Zoom !")
+			} else {
+				r.showOnlyLogView = false
+				fmt.Println("No zoom")
+			}
 		}
 	}
 
@@ -193,6 +204,13 @@ func (r RootModel) View() string {
 	comment, _ := r.data["comment"].(string)
 	if !ok {
 		title = "No job title ..."
+	}
+
+	if r.showOnlyLogView == true {
+		r.logViewport.Width = r.width
+		r.logViewport.Height = r.height - 2
+		zoomedView := r.style.ZoomedStyle.Render(r.logViewport.View())
+		return zoomedView
 	}
 
 	header := r.style.
