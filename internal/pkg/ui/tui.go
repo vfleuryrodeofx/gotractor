@@ -176,6 +176,7 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if r.showOnlyLogView == false {
 				r.showOnlyLogView = true
 				fmt.Println("Zoom !")
+				r.state = logView
 			} else {
 				r.showOnlyLogView = false
 				fmt.Println("No zoom")
