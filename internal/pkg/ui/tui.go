@@ -92,18 +92,18 @@ func WrapText(content string, width int) string {
 
 // Root Model
 type RootModel struct {
-	state       AppState
-	tasks       list.Model
-	logViewport viewport.Model
-	logContent  string
-	width       int
-	height      int
-	style       *Styles
-	data        map[string]any
-	//tasksData []map[string]any
+	state           AppState
+	tasks           list.Model
+	logViewport     viewport.Model
+	logContent      string
+	width           int
+	height          int
+	style           *Styles
+	data            map[string]any
 	tasksData       []any
 	jid             string
 	showOnlyLogView bool
+	currentLog      string
 }
 
 func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
@@ -164,8 +164,10 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			task_item := r.tasks.SelectedItem()
 			selectedTid := task_item.(taskItem).Tid()
-			taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
-			r.logViewport.SetContent(WrapText(taskLog, r.logViewport.Width))
+			//taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
+			r.currentLog = requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
+			//r.logViewport.SetContent(WrapText(taskLog, r.logViewport.Width))
+			r.logViewport.SetContent(WrapText(r.currentLog, r.logViewport.Width))
 		case "tab", "shift+tab":
 			if r.state == tasksView {
 				r.state = logView
@@ -210,6 +212,7 @@ func (r RootModel) View() string {
 	if r.showOnlyLogView == true {
 		r.logViewport.Width = r.width
 		r.logViewport.Height = r.height - 2
+		r.logViewport.SetContent(WrapText(r.currentLog, r.width-1))
 		zoomedView := r.style.ZoomedStyle.Render(r.logViewport.View())
 		return zoomedView
 	}
