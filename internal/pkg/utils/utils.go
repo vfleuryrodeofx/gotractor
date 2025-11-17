@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 	//"log"
 )
 
@@ -77,4 +78,15 @@ func GetAllChildren(tasks []Task) []Task {
 	}
 
 	return result
+}
+
+// Check if string is contained
+func Contains(s, sub string, ci bool) bool {
+	if sub == "" {
+		return false
+	}
+	if ci {
+		return strings.Contains(strings.ToLower(s), strings.ToLower(sub))
+	}
+	return strings.Contains(s, sub)
 }

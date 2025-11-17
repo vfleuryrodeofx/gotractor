@@ -32,7 +32,11 @@ them in a nice TUI.`,
 		slog.Info("Url passed is ", "url", url)
 		jid := requests.ExtractJID(url)
 
-		data, tasksData := requests.GetTaskTree(jid)
+		data, tasksData, err := requests.GetTaskTree(jid)
+		if err != nil {
+			slog.Error("Aborting due to previous error", "error", err)
+			os.Exit(1)
+		}
 		utils.GetListFromTreeTask(tasksData)
 		ui.Show(data, tasksData, jid)
 	},

@@ -29,13 +29,14 @@ func ExtractJID(arg string) string {
 }
 
 // Get tree data
-func GetTaskTree(jid string) (map[string]any, []interface{}) {
+func GetTaskTree(jid string) (map[string]any, []interface{}, error) {
 	url := fmt.Sprintf("http://tractor.rodeofx.com/Tractor/monitor?q=jtree&jid=%s", jid)
 	slog.Info("Querying task tree at", "url", url)
 
 	req, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		slog.Error("Could not resolve the host...")
+		return nil, nil, err
 	}
 	defer req.Body.Close()
 
@@ -62,7 +63,7 @@ func GetTaskTree(jid string) (map[string]any, []interface{}) {
 	data := jidkey["data"].(map[string]any)
 	tasksData := jidkey["children"].([]any)
 
-	return data, tasksData
+	return data, tasksData, nil
 }
 
 func GetTaskLog(owner, jobID, taskID string) string {

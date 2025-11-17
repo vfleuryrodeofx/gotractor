@@ -5,9 +5,12 @@ package ui
 import (
 	"fmt"
 	"log"
+	"log/slog"
 	"os"
+	"strings"
 
 	"github.com/charmbracelet/bubbles/list"
+	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/vfleuryrodeofx/gotractor/internal/pkg/requests"
 	"github.com/vfleuryrodeofx/gotractor/internal/pkg/utils"
 
@@ -23,6 +26,7 @@ type AppState int
 const (
 	tasksView AppState = iota
 	logView
+	searchView
 )
 
 // STYLES TO FIX
@@ -95,6 +99,7 @@ type RootModel struct {
 	state       AppState
 	tasks       list.Model
 	logViewport viewport.Model
+	searchInput textinput.Model
 	logContent  string
 	width       int
 	height      int
@@ -104,6 +109,9 @@ type RootModel struct {
 	tasksData       []any
 	jid             string
 	showOnlyLogView bool
+	searchFocused   bool
+	matches         []int // line indices that matche
+	lines           []string
 }
 
 func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
@@ -130,10 +138,11 @@ func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
 	// Initialize the viewport
 
 	return &RootModel{
-		tasks:     l,
-		tasksData: tasksData,
-		data:      data,
-		jid:       jid,
+		tasks:         l,
+		tasksData:     tasksData,
+		data:          data,
+		jid:           jid,
+		searchFocused: false,
 	}
 }
 
@@ -141,6 +150,22 @@ func (r RootModel) Init() tea.Cmd {
 	return nil
 }
 
+func (r RootModel) updateMatches() {
+	term := r.searchInput.Value()
+	slog.Info("there", term)
+	r.matches = nil
+	if term == "" {
+		// no matches
+		return
+	}
+	for i, ln := range r.lines {
+		slog.Info("there")
+		if utils.Contains(ln, term, true) {
+			r.matches = append(r.matches, i)
+			slog.Info("Found a match ", "match", i)
+		}
+	}
+}
 func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	//var cmd tea.Cmd
@@ -159,12 +184,13 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		r.logViewport = viewport.New(viewportWidth, r.height-20)
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "ctrl+c", "esc", "q":
+		case "ctrl+c", "q":
 			return r, tea.Quit
 		case "enter":
 			task_item := r.tasks.SelectedItem()
 			selectedTid := task_item.(taskItem).Tid()
 			taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
+			r.lines = strings.Split(taskLog, "\n")
 			r.logViewport.SetContent(WrapText(taskLog, r.logViewport.Width))
 		case "tab", "shift+tab":
 			if r.state == tasksView {
@@ -175,11 +201,27 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "z":
 			if r.showOnlyLogView == false {
 				r.showOnlyLogView = true
-				fmt.Println("Zoom !")
+				slog.Info("Zoom !")
 				r.state = logView
 			} else {
 				r.showOnlyLogView = false
-				fmt.Println("No zoom")
+				slog.Info("No zoom")
+			}
+		case "/":
+			if r.showOnlyLogView == true {
+				slog.Info("Searching...")
+				r.searchFocused = true
+				r.searchInput = textinput.New()
+				r.searchInput.Width = 150
+				r.searchInput.Prompt = "/"
+				r.searchInput.SetValue("")
+				r.searchInput.Placeholder = "Search log..."
+				r.searchInput.Focus()
+				r.state = searchView
+			}
+		case "esc":
+			if r.state == searchView {
+				r.searchFocused = !r.searchFocused
 			}
 		}
 	}
@@ -191,12 +233,19 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		cmds = append(cmds, cmd)
 	}
 
-	if r.state == logView {
+	if r.state == searchView {
+		// Handle search Update
+		newSearchInput, cmd := r.searchInput.Update(msg)
+		r.searchInput = newSearchInput
+		cmds = append(cmds, cmd)
+	}
+	if r.state == logView && !r.searchFocused {
 		// Handle viewport updates
 		newviewport, cmd := r.logViewport.Update(msg)
 		r.logViewport = newviewport
 		cmds = append(cmds, cmd)
 	}
+
 	return r, tea.Batch(cmds...)
 }
 
@@ -208,10 +257,18 @@ func (r RootModel) View() string {
 	}
 
 	if r.showOnlyLogView == true {
-		r.logViewport.Width = r.width
-		r.logViewport.Height = r.height - 2
-		zoomedView := r.style.ZoomedStyle.Render(r.logViewport.View())
-		return zoomedView
+		if !r.searchFocused {
+			r.logViewport.Width = r.width
+			r.logViewport.Height = r.height - 2
+			zoomedView := r.style.ZoomedStyle.Render(r.logViewport.View())
+			return zoomedView
+		} else {
+			return lipgloss.JoinVertical(
+				lipgloss.Left,
+				r.style.ZoomedStyle.Render(r.logViewport.View()),
+				r.searchInput.View(),
+			)
+		}
 	}
 
 	header := r.style.
