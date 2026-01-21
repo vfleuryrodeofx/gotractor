@@ -1,5 +1,5 @@
-// // TODO :
-// -
+// TUI package for GoTractor
+// Using Bubbletea
 package ui
 
 import (
@@ -28,18 +28,7 @@ const (
 // STYLES TO FIX
 // Define some basic styling
 var (
-	headerStyle = lipgloss.NewStyle().
-			Bold(true).
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(1, 0).
-			Width(100).
-			Align(lipgloss.Center) //.
-		//Border(lipgloss.RoundedBorder())
-
-	//sectionStyle      = lipgloss.NewStyle().Padding(1, 2).Width(100)
-	containerStyle    = lipgloss.NewStyle().Padding(0, 0)
-	itemStyle         = lipgloss.NewStyle().PaddingLeft(0)
-	selectedItemStyle = lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("170"))
+	containerStyle = lipgloss.NewStyle().Padding(0, 0)
 )
 
 // LIST Widget
@@ -71,7 +60,7 @@ type Styles struct {
 	SelectedBorderColor lipgloss.Color
 }
 
-func DefaultStyle(width int) *Styles {
+func defaultStyle(width int) *Styles {
 	s := new(Styles)
 	s.SelectedBorderColor = lipgloss.Color("#e28743")
 	s.BorderColor = lipgloss.Color("white")
@@ -85,7 +74,7 @@ func DefaultStyle(width int) *Styles {
 }
 
 // Wrap text for viewport
-func WrapText(content string, width int) string {
+func wrapText(content string, width int) string {
 	style := lipgloss.NewStyle().Width(width)
 	return style.Render(content)
 }
@@ -106,15 +95,16 @@ type RootModel struct {
 	currentLog      string
 }
 
-func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
-
-	//fmt.Println(data)
+func initModel(data map[string]any, tasksData []any, jid string) (*RootModel, error) {
 
 	// Initialize the list
 	items := []list.Item{}
-	tasksTitles := utils.GetListFromTreeTask(tasksData)
+	tasksTitles, err := utils.GetListFromTreeTask(tasksData)
+	if err != nil {
+		return nil, fmt.Errorf("%w", err)
+	}
 	for _, task := range tasksTitles {
-		var title string = ""
+		var title string
 		if len(task.Data.Title) > 40 {
 			title = task.Data.Title[0:40]
 		} else {
@@ -134,7 +124,7 @@ func initModel(data map[string]any, tasksData []any, jid string) *RootModel {
 		tasksData: tasksData,
 		data:      data,
 		jid:       jid,
-	}
+	}, nil
 }
 
 func (r RootModel) Init() tea.Cmd {
@@ -143,7 +133,6 @@ func (r RootModel) Init() tea.Cmd {
 
 func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
-	//var cmd tea.Cmd
 	var cmds []tea.Cmd
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
@@ -151,7 +140,6 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		r.height = msg.Height
 		// Calculate sizes for split view (20/80)
 		listWidth := r.width * 20 / 100
-		//viewportWidth := r.width*80/100 - 4 // subtract padding
 		viewportWidth := r.width*80/100 - 1 // subtract padding
 		// Update list width
 		r.tasks.SetSize(listWidth, r.height-20)
@@ -164,10 +152,8 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			task_item := r.tasks.SelectedItem()
 			selectedTid := task_item.(taskItem).Tid()
-			//taskLog := requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
-			r.currentLog = requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
-			//r.logViewport.SetContent(WrapText(taskLog, r.logViewport.Width))
-			r.logViewport.SetContent(WrapText(r.currentLog, r.logViewport.Width))
+			r.currentLog, _ = requests.GetTaskLog(r.data["user"].(string), r.jid, selectedTid)
+			r.logViewport.SetContent(wrapText(r.currentLog, r.logViewport.Width))
 		case "tab", "shift+tab":
 			if r.state == tasksView {
 				r.state = logView
@@ -175,13 +161,11 @@ func (r RootModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				r.state = tasksView
 			}
 		case "z":
-			if r.showOnlyLogView == false {
+			if !r.showOnlyLogView {
 				r.showOnlyLogView = true
-				fmt.Println("Zoom !")
 				r.state = logView
 			} else {
 				r.showOnlyLogView = false
-				fmt.Println("No zoom")
 			}
 		}
 	}
@@ -209,10 +193,10 @@ func (r RootModel) View() string {
 		title = "No job title ..."
 	}
 
-	if r.showOnlyLogView == true {
+	if r.showOnlyLogView {
 		r.logViewport.Width = r.width
 		r.logViewport.Height = r.height - 2
-		r.logViewport.SetContent(WrapText(r.currentLog, r.width-1))
+		r.logViewport.SetContent(wrapText(r.currentLog, r.width-1))
 		zoomedView := r.style.ZoomedStyle.Render(r.logViewport.View())
 		return zoomedView
 	}
@@ -264,12 +248,13 @@ func (r RootModel) View() string {
 	)
 }
 
-// func Show(data, tasksData map[string]any) {
-func Show(data map[string]any, tasksData []any, jid string) {
+func Show(data map[string]any, tasksData []any, jid string) error {
 
-	//main := &RootModel{data: data}
-	main := initModel(data, tasksData, jid)
-	style := DefaultStyle(main.width)
+	main, err := initModel(data, tasksData, jid)
+	if err != nil {
+		return fmt.Errorf("Could not initialize model. Err : %w", err)
+	}
+	style := defaultStyle(main.width)
 	main.style = style
 
 	f, err := tea.LogToFile("debug.log", "debug")
@@ -282,4 +267,5 @@ func Show(data map[string]any, tasksData []any, jid string) {
 	if _, err := p.Run(); err != nil {
 		log.Fatal(err)
 	}
+	return nil
 }

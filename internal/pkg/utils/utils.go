@@ -3,7 +3,6 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	//"log"
 )
 
 type Task struct {
@@ -42,23 +41,19 @@ func convertInterfaceToTasks(data []any) ([]Task, error) {
 }
 
 // Get a list of tasks based on the tree of tasks
-func GetListFromTreeTask(taskTree []any) []Task {
+func GetListFromTreeTask(taskTree []any) ([]Task, error) {
 
 	// Create a slice to hold the tasks
 	var tasks []Task
 	tasks, err := convertInterfaceToTasks(taskTree)
 	if err != nil {
-		panic(err)
+		return []Task{}, fmt.Errorf("Could not convert to tasks. Err : %w", err)
 	}
 
 	// Get all children including parent tasks
 	allTasks := GetAllChildren(tasks)
 
-	// Print all tasks to verify the parsing
-	//for i, task := range allTasks {
-	//fmt.Printf("Task #%v: %s, Title: %s\n", i, task.Hash, task.Data.Title)
-	//}
-	return allTasks
+	return allTasks, nil
 }
 
 // GetAllChildren recursively collects all children tasks from a task slice

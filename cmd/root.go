@@ -22,19 +22,20 @@ var rootCmd = &cobra.Command{
 them in a nice TUI.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("🚜")
-		if len(args) != 1 {
-			slog.Warn("You need to provide 1 jid or URL with a jid")
-			os.Exit(1)
-		}
 		url := args[0]
 		slog.Info("Url passed is ", "url", url)
 		jid := requests.ExtractJID(url)
 
-		data, tasksData := requests.GetTaskTree(jid)
+		data, tasksData, err := requests.GetTaskTree(jid)
+		if err != nil {
+			return fmt.Errorf("Could not get the task tree for %s, err : %w", jid, err)
+		}
 		utils.GetListFromTreeTask(tasksData)
 		ui.Show(data, tasksData, jid)
+		return nil
 	},
 }
 
@@ -45,16 +46,4 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
-}
-
-func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.gotractor.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
